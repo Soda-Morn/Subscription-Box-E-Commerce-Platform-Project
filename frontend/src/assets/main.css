@@ -1,0 +1,254 @@
+/* Import Tailwind's base, components, and utilities */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   BASE — matches InApp _variables.scss
+   Font: Poppins, 14px base (0.875rem)
+   Background: gray-100 (#f5f5f5)
+──────────────────────────────────────────────────────────────────────────────*/
+@layer base {
+  body {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.875rem;      /* 14px — same as InApp */
+    background-color: #f5f5f5; /* gray-100 — same as InApp body bg */
+    color: #262626;            /* gray-800 — default text */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a {
+    color: #404040;            /* gray-700 — InApp link color */
+    text-decoration: none;
+  }
+  a:hover {
+    color: #8B0000;            /* primary — InApp link hover */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 400;          /* InApp headings-font-weight: 400 */
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   LAYOUT — copied exactly from InApp _custom.scss
+   Sidebar: 240px fixed left
+   Topbar:  60px fixed top, margin-left 240px
+   Content: margin-left 240px
+   These need exact pixel values + fixed positioning so we define them here.
+──────────────────────────────────────────────────────────────────────────────*/
+@layer components {
+
+  /* Sidebar */
+  .sidebar {
+    width: 240px;
+    background: #ffffff;
+    border-right: 1px solid #e5e5e5;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding-top: 60px;       /* leave room for the logo area */
+    z-index: 1030;
+    overflow-y: auto;
+    transition: width 0.3s, left 0.3s;
+  }
+
+  /* Logo area inside sidebar — sits at the very top */
+  .logo-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 60px;
+    width: 100%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-left: 17px;
+    border-bottom: 1px solid #e5e5e5;
+  }
+
+  /* Topbar */
+  .topbar {
+    height: 60px;
+    margin-left: 240px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    z-index: 1020;
+    display: flex;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  /* Main content area */
+  .content {
+    margin-left: 240px;
+    padding-top: 60px;     /* clear the fixed topbar */
+    min-height: 100vh;
+  }
+
+  /* ── Sidebar nav links — exact InApp style ─────────────────────────────── */
+  .nav-link {
+    color: #262626;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 400;
+    gap: 12px;
+    white-space: nowrap;
+    margin: 1px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: color 0.15s, background-color 0.15s;
+  }
+  .nav-link:hover {
+    color: #8B0000;
+    background-color: rgba(139, 0, 0, 0.095);
+  }
+  .nav-link.active {
+    color: #8B0000;
+    background-color: rgba(139, 0, 0, 0.095);
+    font-weight: 500;
+  }
+
+  /* Section labels inside sidebar (Main / Account) */
+  .nav-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #a3a3a3;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 12px 16px 4px;
+    display: block;
+  }
+
+  /* ── Cards ─────────────────────────────────────────────────────────────── */
+  .card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+  }
+
+  /* Stat cards — colored bg + border (10% / 25% opacity) — same as InApp */
+  .card-primary { background-color: rgba(139,0,0,0.08);  border-color: rgba(139,0,0,0.25); }
+  .card-success { background-color: rgba(0,201,81,0.08);  border-color: rgba(0,201,81,0.25); }
+  .card-info    { background-color: rgba(0,184,219,0.08); border-color: rgba(0,184,219,0.25); }
+  .card-warning { background-color: rgba(212,175,55,0.08); border-color: rgba(212,175,55,0.25); }
+
+  /* ── Icon shape — InApp icon-shape icon-md ──────────────────────────────── */
+  .icon-shape {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .icon-md { width: 40px; height: 40px; font-size: 20px; }
+
+  /* ── Badges — subtle variant (colored bg + border) like InApp ─────────── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  .badge-primary { background: rgba(139,0,0,0.10);   color: #8B0000; border: 1px solid rgba(139,0,0,0.25); }
+  .badge-success { background: rgba(0,201,81,0.10);   color: #00a043; border: 1px solid rgba(0,201,81,0.25); }
+  .badge-info    { background: rgba(0,184,219,0.10);  color: #007a93; border: 1px solid rgba(0,184,219,0.25); }
+  .badge-warning { background: rgba(212,175,55,0.10); color: #a07800; border: 1px solid rgba(212,175,55,0.25); }
+  .badge-danger  { background: rgba(251,44,54,0.10);  color: #d91020; border: 1px solid rgba(251,44,54,0.25); }
+
+  /* Solid badge (used for Completed status) */
+  .badge-solid-success { background: #00C951; color: #fff; }
+  .badge-solid-danger  { background: #FB2C36; color: #fff; }
+
+  /* ── List group — InApp list-group list-group-flush ─────────────────────── */
+  .list-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;            /* gap-3 = 12px in InApp */
+    padding: 12px 16px;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .list-item:last-child { border-bottom: none; }
+  .list-item:hover      { background-color: #fafafa; }
+
+  /* ── Buttons ──────────────────────────────────────────────────────────── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+    text-decoration: none;
+  }
+  .btn-primary { background: #8B0000; color: #fff; }
+  .btn-primary:hover { background: #6B0000; color: #fff; }
+
+  .btn-light { background: #f5f5f5; color: #262626; border: 1px solid #e5e5e5; }
+  .btn-light:hover { background: #e5e5e5; }
+
+  .btn-outline { background: transparent; border: 1px solid #e5e5e5; color: #525252; }
+  .btn-outline:hover { background: #f5f5f5; }
+
+  .btn-sm { padding: 4px 10px; font-size: 12px; }
+
+  /* ── Table ──────────────────────────────────────────────────────────────── */
+  .data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .data-table th { font-weight: 500; color: #737373; padding: 10px 16px; text-align: left; border-bottom: 1px solid #e5e5e5; }
+  .data-table td { padding: 12px 16px; border-bottom: 1px solid #f5f5f5; color: #404040; }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:hover td { background: #fafafa; }
+
+  /* ── Form inputs ─────────────────────────────────────────────────────── */
+  .form-select {
+    padding: 4px 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;
+    font-size: 13px;
+    color: #525252;
+    background: #fff;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+  }
+  .form-select:focus { outline: none; border-color: #8B0000; }
+
+  .form-input {
+    width: 100%;
+    border: 1px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 14px;
+    color: #404040;
+    background: #fff;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.15s;
+  }
+  .form-input:focus { outline: none; border-color: #8B0000; }
+  .form-input::placeholder { color: #a3a3a3; }
+
+  /* ── Overlay (mobile sidebar backdrop) ──────────────────────────────── */
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(1px);
+    display: none;
+    z-index: 1025;
+  }
+  .overlay.show { display: block; }
+}
